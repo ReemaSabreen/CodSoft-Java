@@ -6,42 +6,42 @@ public class NumberGuessingGame {
         playGame();
     }
 
-    // Function to generate a random number within a specified range
-    private static int generateRandomNumber(int lower, int upper) {
+    
+    private static int generateRandNumber(int lower, int upper) {
         Random rand = new Random();
         return rand.nextInt(upper - lower + 1) + lower;
     }
 
-    // Function to play a single round of the number guessing game
-    private static int playRound() {
-        System.out.println("Welcome to Guess the Number Game!");
+    
+    private static int Rounds() {
+        System.out.println("Welcome to Number Guessing Game!");
 
-        // Set the range for the random number
+       
         int lowerLimit = 1;
         int upperLimit = 100;
 
-        int targetNumber = generateRandomNumber(lowerLimit, upperLimit);
+        int targetNumber = generateRandNumber(lowerLimit, upperLimit);
 
-        // Set the maximum number of attempts
+        
         int maxAttempts = 10;
         int attempts = 0;
         int userGuess;
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
         while (attempts < maxAttempts) {
-            // Prompt the user to enter their guess
-            System.out.print("Guess a number between " + lowerLimit + " and " + upperLimit + ": ");
+            
+            System.out.print("Guess the number between " + lowerLimit + " and " + upperLimit + ": ");
 
-            // Validate user input to handle non-integer input
-            while (!scanner.hasNextInt()) {
+            
+            while (!sc.hasNextInt()) {
                 System.out.println("Invalid input. Please enter a valid integer.");
-                scanner.next(); // Clear the invalid input
+                sc.next(); // Clear the invalid input
             }
 
-            userGuess = scanner.nextInt();
+            userGuess = sc.nextInt();
 
-            // Check the user's guess
+            
             if (userGuess == targetNumber) {
                 System.out.println("Congratulations! You guessed the correct number " + targetNumber + " in " + (attempts + 1) + " attempts.");
                 break;
@@ -61,29 +61,29 @@ public class NumberGuessingGame {
         return attempts;
     }
 
-    // Function to play the game multiple times
+   
     private static void playGame() {
         int roundsWon = 0;
         char playAgain;
         int totalAttempts = 0;
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
         do {
-            totalAttempts += playRound();
+            totalAttempts += Rounds();
             roundsWon++;
 
-            // Display the score after each round
+            
             System.out.println("\nScore after Round " + roundsWon + ":");
             System.out.println("Rounds won: " + roundsWon);
             System.out.println("Total attempts: " + totalAttempts);
 
-            // Ask the user if they want to play again
+           
             System.out.println("\nDo you want to play again? (y/n): ");
 
-            // Validate user input for replay
+           
             while (true) {
-                playAgain = scanner.next().toLowerCase().charAt(0);
+                playAgain = sc.next().toLowerCase().charAt(0);
                 if (playAgain == 'y' || playAgain == 'n') {
                     break;
                 } else {
@@ -93,9 +93,9 @@ public class NumberGuessingGame {
 
         } while (playAgain == 'y');
 
-        System.out.println("\nGame Over. Your final score:");
+        System.out.println("\nGame Over!. Your final score:");
         System.out.println("Rounds won: " + roundsWon);
         System.out.println("Total attempts: " + totalAttempts);
-        scanner.close();
+        sc.close();
     }
 }
