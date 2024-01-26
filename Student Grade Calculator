@@ -1,0 +1,67 @@
+import java.util.Scanner;
+public class StudentGradeCalculator {
+    private static void GradeCalculate() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("STUDENT GRADE CALCULATOR");
+
+        while(true){
+            
+            System.out.print("Enter the number of subjects: ");
+            int NumSubs = sc.nextInt();
+            
+            if (NumSubs <= 0) {
+                System.out.println("Invalid Input!.please enter a valid input.");
+                continue;
+            }
+
+            int[] SubMark = new int[NumSubs];
+
+            for (int i = 0; i < NumSubs; i++) {
+                System.out.print("Enter marks for subject " + (i + 1) + " (out of 100): ");
+               
+               SubMark[i] = sc.nextInt();
+
+                if (SubMark[i] < 0 || SubMark[i] > 100) {
+                    System.out.println("Invalid input. Please enter marks in the range 0-100.");
+                    i--; 
+                }
+            }
+            int TotalMarks = 0;
+             for (int marks : SubMark) {
+                TotalMarks += marks;
+            }
+            double AvgPercentage = (double) TotalMarks / NumSubs;
+            AvgPercentage = Math.round(AvgPercentage * 100.0) / 100.0;
+            char grade;
+            if (AvgPercentage >= 90) {
+                grade = 'A';
+            } else if (AvgPercentage >= 80) {
+                grade = 'B';
+            } else if (AvgPercentage >= 70) {
+                grade = 'C';
+            } else if (AvgPercentage >= 60) {
+                grade = 'D';
+            } else {
+                grade = 'F';
+            }
+
+            System.out.println("\nRESULTS");
+            System.out.println("Total Marks: " + TotalMarks);
+            System.out.println("Average Percentage: " +AvgPercentage + "%");
+            System.out.println("Grade: " + grade);
+
+            System.out.print("\nDo you want to calculate grades for another student? (y/n): ");
+            char CalculateAgain = sc.next().toLowerCase().charAt(0);
+
+            if (CalculateAgain != 'y') {
+                break;
+            }
+        }
+
+        System.out.println("STUDENT(S) GRADE CALCULATED");
+        sc.close();
+    }
+    public static void main(String[]args){
+        GradeCalculate();
+    }
+}
